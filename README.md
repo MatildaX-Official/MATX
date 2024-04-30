@@ -1,11 +1,11 @@
-MATX Core integration/staging repository
+MatildaX Core integration/staging repository
 =====================================
 
 [![master Actions Status](https://github.com/MatildaX-Official/MATX/workflows/CI%20Actions%20for%20MATX/badge.svg)](https://github.com/MatildaX-Official/MATX/actions)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/MatildaX-Official/matx?color=%235c4b7d&cacheSeconds=3600)](https://github.com/MatildaX-Official/MATX/releases)
 [![GitHub Release Date](https://img.shields.io/github/release-date/MatildaX-Official/matx?color=%235c4b7d&cacheSeconds=3600)](https://github.com/MatildaX-Official/MATX/releases)
 
-## What is MATX?
+## What is MatildaX?
 
 MATX is an open source community-driven cryptocurrency, focused on five main aspects:
 
@@ -19,7 +19,7 @@ MATX is an open source community-driven cryptocurrency, focused on five main asp
 
 (5) Ease of Use: MATX is determined to offer the best possible graphical interface for a core node/wallet. A full featured graphical product for new and advanced users.
 
-A lot more information and specs at [MATX.org](https://www.matx.org/). Join the community at [MATX Discord](https://discordapp.com/invite/jzqVsJd).
+A lot more information and specs at [MATX.org](https://www.matx.org/). Join the community at [MATX Discord](https://discordapp.com/invite/pHKPesCG).
 
 ## License
 MATX Core is released under the terms of the MIT license. See [COPYING](https://github.com/MatildaX-Official/MATX/blob/master/COPYING) for more information or see https://opensource.org/licenses/MIT.
