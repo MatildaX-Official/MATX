@@ -1,0 +1,11 @@
+[Protocol]
+exec=matx-qt '%u'
+protocol=matx
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false

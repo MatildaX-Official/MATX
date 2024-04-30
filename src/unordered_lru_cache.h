@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef PIVX_UNORDERED_LRU_CACHE_H
-#define PIVX_UNORDERED_LRU_CACHE_H
+#ifndef MATX_UNORDERED_LRU_CACHE_H
+#define MATX_UNORDERED_LRU_CACHE_H
 
 #include <algorithm>
 #include <cassert>
@@ -112,4 +112,4 @@ private:
     }
 };
 
-#endif // PIVX_UNORDERED_LRU_CACHE_H
+#endif // MATX_UNORDERED_LRU_CACHE_H

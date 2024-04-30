@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2020 The PIVX Core developers
+// Copyright (c) 2015-2020 The MATX Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -13,7 +13,7 @@ static const int MODEL_UPDATE_DELAY = 1000;
 /* AskPassphraseDialog -- Maximum passphrase length */
 static const int MAX_PASSPHRASE_SIZE = 1024;
 
-/* Pivx GUI -- Size of icons in status bar */
+/* Matx GUI -- Size of icons in status bar */
 static const int STATUSBAR_ICONSIZE = 16;
 
 static const bool DEFAULT_SPLASHSCREEN = true;
@@ -49,9 +49,9 @@ static const int MAX_URI_LENGTH = 255;
 #define EXPORT_IMAGE_SIZE 256
 
 
-#define QAPP_ORG_NAME "PIVX"
-#define QAPP_ORG_DOMAIN "pivx.org"
-#define QAPP_APP_NAME_DEFAULT "PIVX-Qt"
-#define QAPP_APP_NAME_TESTNET "PIVX-Qt-testnet"
+#define QAPP_ORG_NAME "MATX"
+#define QAPP_ORG_DOMAIN "matx.org"
+#define QAPP_APP_NAME_DEFAULT "MATX-Qt"
+#define QAPP_APP_NAME_TESTNET "MATX-Qt-testnet"
 
 #endif // BITCOIN_QT_GUICONSTANTS_H

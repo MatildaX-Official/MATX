@@ -1,11 +1,11 @@
 Sample configuration files for:
 ```
-SystemD: pivxd.service
-Upstart: pivxd.conf
-OpenRC:  pivxd.openrc
-         pivxd.openrcconf
-CentOS:  pivxd.init
-macOS:    org.pivx.pivxd.plist
+SystemD: matxd.service
+Upstart: matxd.conf
+OpenRC:  matxd.openrc
+         matxd.openrcconf
+CentOS:  matxd.init
+macOS:    org.matx.matxd.plist
 ```
 have been made available to assist packagers in creating node packages here.
 

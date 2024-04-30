@@ -1,0 +1,21 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="bn">locale/matx_bn.qm</file>
+        <file alias="de">locale/matx_de.qm</file>
+        <file alias="en">locale/matx_en.qm</file>
+        <file alias="es">locale/matx_es.qm</file>
+        <file alias="es_ES">locale/matx_es_ES.qm</file>
+        <file alias="fa">locale/matx_fa.qm</file>
+        <file alias="fr_FR">locale/matx_fr_FR.qm</file>
+        <file alias="hr_HR">locale/matx_hr_HR.qm</file>
+        <file alias="it">locale/matx_it.qm</file>
+        <file alias="ko_KR">locale/matx_ko_KR.qm</file>
+        <file alias="nl">locale/matx_nl.qm</file>
+        <file alias="pl">locale/matx_pl.qm</file>
+        <file alias="ru">locale/matx_ru.qm</file>
+        <file alias="sv">locale/matx_sv.qm</file>
+        <file alias="tr">locale/matx_tr.qm</file>
+        <file alias="zh_CN">locale/matx_zh_CN.qm</file>
+        <file alias="zh_TW">locale/matx_zh_TW.qm</file>
+    </qresource>
+</RCC>

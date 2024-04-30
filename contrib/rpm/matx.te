@@ -1,0 +1,81 @@
+policy_module(matx, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type matx_t;
+type matx_exec_t;
+init_daemon_domain(matx_t, matx_exec_t)
+
+permissive matx_t;
+
+type matx_initrc_exec_t;
+init_script_file(matx_initrc_exec_t)
+
+type matx_conf_t;
+files_type(matx_conf_t)
+
+type matx_var_lib_t;
+files_type(matx_var_lib_t)
+
+type matx_var_run_t;
+files_type(matx_var_run_t)
+
+type matx_port_t;
+corenet_port(matx_port_t)
+
+########################################
+#
+# matx local policy
+#
+allow matx_t self:process { fork };
+
+allow matx_t self:fifo_file rw_fifo_file_perms;
+allow matx_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(matx_t, matx_conf_t, matx_conf_t)
+manage_files_pattern(matx_t, matx_conf_t, matx_conf_t)
+
+manage_dirs_pattern(matx_t, matx_var_lib_t, matx_var_lib_t)
+manage_files_pattern(matx_t, matx_var_lib_t, matx_var_lib_t)
+files_var_lib_filetrans(matx_t, matx_var_lib_t, { dir file })
+
+manage_dirs_pattern(matx_t, matx_var_run_t, matx_var_run_t)
+manage_files_pattern(matx_t, matx_var_run_t, matx_var_run_t)
+
+sysnet_dns_name_resolve(matx_t)
+corenet_all_recvfrom_unlabeled(matx_t)
+
+allow matx_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(matx_t)
+corenet_tcp_sendrecv_generic_node(matx_t)
+corenet_tcp_sendrecv_all_ports(matx_t)
+corenet_tcp_bind_generic_node(matx_t)
+
+gen_require(`
+    type matx_port_t;
+')
+allow matx_t matx_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type matx_port_t;
+')
+allow matx_t matx_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(matx_t)
+
+files_read_etc_files(matx_t)
+
+miscfiles_read_localization(matx_t)
+
+sysnet_dns_name_resolve(matx_t)
+
+allow matx_t matx_exec_t:file execute_no_trans;
+allow matx_t self:process setsched;
+corecmd_exec_ls(matx_t)
+corenet_tcp_connect_http_port(matx_t)
+dev_read_urand(matx_t)
+fs_getattr_xattr_fs(matx_t)
+kernel_read_system_state(matx_t)

@@ -10,7 +10,7 @@ forward all unrecognized arguments onto the individual test scripts.
 Functional tests are disabled on Windows by default. Use --force to run them anyway.
 
 For a description of arguments recognized by test scripts, see
-`test/functional/test_framework/test_framework.py:PivxTestFramework.main`.
+`test/functional/test_framework/test_framework.py:MatxTestFramework.main`.
 
 """
 
@@ -308,14 +308,14 @@ def main():
     logging.basicConfig(format='%(message)s', level=logging_level)
 
     # Create base test directory
-    tmpdir = "%s/pivx_test_runner_%s" % (args.tmpdirprefix, datetime.datetime.now().strftime("%Y%m%d_%H%M%S"))
+    tmpdir = "%s/matx_test_runner_%s" % (args.tmpdirprefix, datetime.datetime.now().strftime("%Y%m%d_%H%M%S"))
     os.makedirs(tmpdir)
 
     logging.debug("Temporary test directory at %s" % tmpdir)
 
     enable_wallet = config["components"].getboolean("ENABLE_WALLET")
     enable_utils = config["components"].getboolean("ENABLE_UTILS")
-    enable_pivxd = config["components"].getboolean("ENABLE_BITCOIND")
+    enable_matxd = config["components"].getboolean("ENABLE_BITCOIND")
 
     if config["environment"]["EXEEXT"] == ".exe" and not args.force:
         # https://github.com/bitcoin/bitcoin/commit/d52802551752140cf41f0d9a225a43e84404d3e9
@@ -323,8 +323,8 @@ def main():
         print("Tests currently disabled on Windows by default. Use --force option to enable")
         sys.exit(0)
 
-    if not (enable_wallet and enable_utils and enable_pivxd):
-        print("No functional tests to run. Wallet, utils, and pivxd must all be enabled")
+    if not (enable_wallet and enable_utils and enable_matxd):
+        print("No functional tests to run. Wallet, utils, and matxd must all be enabled")
         print("Rerun `configure` with -enable-wallet, -with-utils and -with-daemon and rerun make")
         sys.exit(0)
 
@@ -401,12 +401,12 @@ def main():
 # - "keep"    : Check if the cache in the directory is valid. Recreate only if invalid.
 # - "skip"    : Don' check the contents of the cache and don't create a new one
 def run_tests(test_list, src_dir, build_dir, exeext, tmpdir, jobs=1, enable_coverage=False, args=None, combined_logs_len=0, keep_cache="rewrite"):
-    # Warn if pivxd is already running (unix only)
+    # Warn if matxd is already running (unix only)
     if args is None:
         args = []
     try:
-        if subprocess.check_output(["pidof", "pivxd"]) is not None:
-            print("%sWARNING!%s There is already a pivxd process running on this system. Tests may fail unexpectedly due to resource contention!" % (BOLD[1], BOLD[0]))
+        if subprocess.check_output(["pidof", "matxd"]) is not None:
+            print("%sWARNING!%s There is already a matxd process running on this system. Tests may fail unexpectedly due to resource contention!" % (BOLD[1], BOLD[0]))
     except (OSError, subprocess.SubprocessError):
         pass
 
@@ -417,8 +417,8 @@ def run_tests(test_list, src_dir, build_dir, exeext, tmpdir, jobs=1, enable_cove
 
     #Set env vars
     if "BITCOIND" not in os.environ:
-        os.environ["BITCOIND"] = build_dir + '/src/pivxd' + exeext
-        os.environ["BITCOINCLI"] = build_dir + '/src/pivx-cli' + exeext
+        os.environ["BITCOIND"] = build_dir + '/src/matxd' + exeext
+        os.environ["BITCOINCLI"] = build_dir + '/src/matx-cli' + exeext
 
     tests_dir = src_dir + '/test/functional/'
 
@@ -536,7 +536,7 @@ class TestHandler:
         self.test_list = test_list
         self.flags = flags
         self.num_running = 0
-        # In case there is a graveyard of zombie pivxds, we can apply a
+        # In case there is a graveyard of zombie matxds, we can apply a
         # pseudorandom offset to hopefully jump over them.
         # (625 is PORT_RANGE/MAX_NODES)
         self.portseed_offset = int(time.time() * 1000) % 625
@@ -663,7 +663,7 @@ class RPCCoverage():
     Coverage calculation works by having each test script subprocess write
     coverage files into a particular directory. These files contain the RPC
     commands invoked during testing, as well as a complete listing of RPC
-    commands per `pivx-cli help` (`rpc_interface.txt`).
+    commands per `matx-cli help` (`rpc_interface.txt`).
 
     After all tests complete, the commands run are combined and diff'd against
     the complete list to calculate uncovered RPC commands.

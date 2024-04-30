@@ -1,8 +1,8 @@
-# Copyright (c) 2020-2024 The PIVX Core developers
+# Copyright (c) 2020-2024 The MATX Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-name: CI Actions for PIVX
+name: CI Actions for MATX
 
 on: [push, pull_request]
 jobs:
@@ -283,7 +283,7 @@ jobs:
           make distdir VERSION=${{ matrix.config.os }}
           echo ::endgroup::
 
-          cd pivx-${{ matrix.config.os }}
+          cd matx-${{ matrix.config.os }}
 
           echo ::group::Configure
           ./configure --cache-file=../config.cache $BITCOIN_CONFIG_ALL ${{ matrix.config.BITCOIN_CONFIG }} || ( cat config.log && false)
@@ -291,27 +291,27 @@ jobs:
 
       - name: Build Native Wallet
         run: |
-          cd build/pivx-${{ matrix.config.os }}/
+          cd build/matx-${{ matrix.config.os }}/
           make -j2 ${{ matrix.config.goal }} || ( echo "Build failure. Verbose build follows." && make ${{ matrix.config.goal }} V=1 ; false )
 
       - name: Run Unit Tests
         if: matrix.config.unit_tests == true
         run: |
-          cd build/pivx-${{ matrix.config.os }}/
+          cd build/matx-${{ matrix.config.os }}/
           make -j2 check VERBOSE=1
 
       - name: Create Tar Archive
         if: matrix.config.functional_tests == true
         run: |
-          strip build/pivx-${{ matrix.config.os }}/src/pivxd
-          strip build/pivx-${{ matrix.config.os }}/src/pivx-cli
+          strip build/matx-${{ matrix.config.os }}/src/matxd
+          strip build/matx-${{ matrix.config.os }}/src/matx-cli
           tar -hcvf native-${{ matrix.config.os }}-built.tar \
-            build/pivx-${{ matrix.config.os }}/share/rpcauth/ \
-            build/pivx-${{ matrix.config.os }}/test/ \
-            build/pivx-${{ matrix.config.os }}/params/ \
-            build/pivx-${{ matrix.config.os }}/src/pivxd \
-            build/pivx-${{ matrix.config.os }}/src/pivx-cli \
-            build/pivx-${{ matrix.config.os }}/src/test/data/asmap.raw
+            build/matx-${{ matrix.config.os }}/share/rpcauth/ \
+            build/matx-${{ matrix.config.os }}/test/ \
+            build/matx-${{ matrix.config.os }}/params/ \
+            build/matx-${{ matrix.config.os }}/src/matxd \
+            build/matx-${{ matrix.config.os }}/src/matx-cli \
+            build/matx-${{ matrix.config.os }}/src/test/data/asmap.raw
 
       - name: Upload Build Artifact
         if: matrix.config.functional_tests == true
@@ -322,7 +322,7 @@ jobs:
           retention-days: 5
 
   # Job to run the python functional test suite for native linux and macOS builds.
-  # Uses a build artifact from the previous job to provide pivxd/pivx-cli and the test suite files.
+  # Uses a build artifact from the previous job to provide matxd/matx-cli and the test suite files.
   test_native_wallet:
     name: Native-${{ matrix.config.name }}-tests
     runs-on: ${{ matrix.config.os }}
@@ -372,14 +372,14 @@ jobs:
       - name: Extract Artifact Archive
         run: tar -xvf native-${{ matrix.config.os }}-built.tar
 
-      - name: Install PIVX Params
+      - name: Install MATX Params
         run: |
-          cd build/pivx-${{ matrix.config.os }}/params/
+          cd build/matx-${{ matrix.config.os }}/params/
           ./install-params.sh
 
       - name: Run Functional Tests
         run: |
-          cd build/pivx-${{ matrix.config.os }}/
+          cd build/matx-${{ matrix.config.os }}/
           test/functional/test_runner.py --combinedlogslen=4000 ${{ matrix.config.test_runner_extra }}
 
   # Job to compile all dependencies deterministically using the depends build system.
@@ -627,7 +627,7 @@ jobs:
           make distdir VERSION=${{ matrix.config.host }}
           echo ::endgroup::
 
-          cd pivx-${{ matrix.config.host }}
+          cd matx-${{ matrix.config.host }}
 
           echo ::group::Configure
           ./configure --cache-file=../config.cache $BITCOIN_CONFIG_ALL ${{ matrix.config.BITCOIN_CONFIG }} || ( cat config.log && false)
@@ -635,40 +635,40 @@ jobs:
 
       - name: Build Wallet
         run: |
-          cd build/pivx-${{ matrix.config.host }}/
+          cd build/matx-${{ matrix.config.host }}/
           make -j2 ${{ matrix.config.goal }} || ( echo "Build failure. Verbose build follows." && make ${{ matrix.config.goal }} V=1 ; false )
 
       - name: Check Security
         run: |
-          cd build/pivx-${{ matrix.config.host }}/
+          cd build/matx-${{ matrix.config.host }}/
           make -j2 -C src check-security
 
       - name: Check Exported Symbols
         if: matrix.config.symbol_check == true
         run: |
-          cd build/pivx-${{ matrix.config.host }}/
+          cd build/matx-${{ matrix.config.host }}/
           make -j2 -C src check-symbols
 
       - name: Run Unit Tests
         if: matrix.config.unit_tests == true
         run: |
-          cd build/pivx-${{ matrix.config.host }}
+          cd build/matx-${{ matrix.config.host }}
           make -j2 check VERBOSE=1
 
       - name: Create Tar Archive
         if: matrix.config.functional_tests == true
         run: |
           if [[ ${{ matrix.config.host }} != *apple* ]]; then
-            strip build/pivx-${{ matrix.config.host }}/src/pivxd
-            strip build/pivx-${{ matrix.config.host }}/src/pivx-cli
+            strip build/matx-${{ matrix.config.host }}/src/matxd
+            strip build/matx-${{ matrix.config.host }}/src/matx-cli
           fi
           tar -hcvf ${{ matrix.config.host }}-built.tar \
-            build/pivx-${{ matrix.config.host }}/share/rpcauth \
-            build/pivx-${{ matrix.config.host }}/test/ \
-            build/pivx-${{ matrix.config.host }}/params/ \
-            build/pivx-${{ matrix.config.host }}/src/pivxd \
-            build/pivx-${{ matrix.config.host }}/src/pivx-cli \
-            build/pivx-${{ matrix.config.host }}/src/test/data/asmap.raw
+            build/matx-${{ matrix.config.host }}/share/rpcauth \
+            build/matx-${{ matrix.config.host }}/test/ \
+            build/matx-${{ matrix.config.host }}/params/ \
+            build/matx-${{ matrix.config.host }}/src/matxd \
+            build/matx-${{ matrix.config.host }}/src/matx-cli \
+            build/matx-${{ matrix.config.host }}/src/test/data/asmap.raw
 
       - name: Upload Build Artifact
         if: matrix.config.functional_tests == true
@@ -679,13 +679,13 @@ jobs:
           retention-days: 5
 
   # Job to run the python functional test suite for depends based linux builds.
-  # Uses a build artifact from the previous job to provide pivxd/pivx-cli and the test suite files.
+  # Uses a build artifact from the previous job to provide matxd/matx-cli and the test suite files.
   test_depends_wallet:
     name: Test-Depends-${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
     needs: build_depends_wallet
     env:
-      PARAMS_DIR: ${{ github.workspace }}/.pivx-params
+      PARAMS_DIR: ${{ github.workspace }}/.matx-params
     defaults:
       run:
         shell: bash
@@ -732,14 +732,14 @@ jobs:
       - name: Extract Artifact Archive
         run: tar -xvf ${{ matrix.config.host }}-built.tar
 
-      - name: Install PIVX Params
+      - name: Install MATX Params
         run: |
-          cd build/pivx-${{ matrix.config.host }}/params/
+          cd build/matx-${{ matrix.config.host }}/params/
           ./install-params.sh
 
       - name: Run Functional Tests
         run: |
-          cd build/pivx-${{ matrix.config.host }}/
+          cd build/matx-${{ matrix.config.host }}/
           if [[ ${{ matrix.config.os }} = macos* ]]; then
             sed -i.old 's/home/Users/' test/config.ini
           fi

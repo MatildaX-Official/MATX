@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-# Copyright (c) 2021 The PIVX Core developers
+# Copyright (c) 2021 The MATX Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or https://www.opensource.org/licenses/mit-license.php.
 
-from test_framework.test_framework import PivxTestFramework
+from test_framework.test_framework import MatxTestFramework
 from test_framework.util import (
     assert_equal,
     p2p_port,
@@ -12,7 +12,7 @@ from test_framework.util import (
 import os
 import time
 
-class GovernanceInvalidBudgetTest(PivxTestFramework):
+class GovernanceInvalidBudgetTest(MatxTestFramework):
 
     def set_test_params(self):
         self.setup_clean_chain = True

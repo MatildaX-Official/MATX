@@ -1,0 +1,8 @@
+/usr/bin/matx-cli		--	gen_context(system_u:object_r:matx_exec_t,s0)
+/usr/sbin/matxd		--	gen_context(system_u:object_r:matx_exec_t,s0)
+/usr/lib(64)?/matx/matxd		--	gen_context(system_u:object_r:matx_exec_t,s0)
+
+/etc/matx(/.*)?		gen_context(system_u:object_r:matx_conf_t,s0)
+/var/lib/matx(/.*)?		gen_context(system_u:object_r:matx_var_lib_t,s0)
+
+(/var)?/run/matxd(/.*)?   gen_context(system_u:object_r:matx_var_run_t,s0)

@@ -1,9 +1,9 @@
-// Copyright (c) 2019-2020 The PIVX Core developers
+// Copyright (c) 2019-2020 The MATX Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef PIVX_ADDRESSBOOK_H
-#define PIVX_ADDRESSBOOK_H
+#ifndef MATX_ADDRESSBOOK_H
+#define MATX_ADDRESSBOOK_H
 
 #include <map>
 #include <string>
@@ -50,4 +50,4 @@ namespace AddressBook {
 
 }
 
-#endif //PIVX_ADDRESSBOOK_H
+#endif //MATX_ADDRESSBOOK_H

@@ -1,14 +1,14 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2021 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2022 The PIVX Core developers
+// Copyright (c) 2015-2022 The MATX Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "optional.h"
 #include "validation.h"
 #if defined(HAVE_CONFIG_H)
-#include "config/pivx-config.h"
+#include "config/matx-config.h"
 #endif
 
 #include "wallet/wallet.h"
@@ -42,7 +42,7 @@ bool fPayAtLeastCustomFee = true;
 bool bSpendZeroConfChange = DEFAULT_SPEND_ZEROCONF_CHANGE;
 
 /**
- * Fees smaller than this (in upiv) are considered zero fee (for transaction creation)
+ * Fees smaller than this (in umat) are considered zero fee (for transaction creation)
  * We are ~100 times smaller then bitcoin now (2015-06-23), set minTxFee 10 times higher
  * so it's still 10 times lower comparing to bitcoin.
  * Override with -mintxfee
@@ -2444,7 +2444,7 @@ bool CWallet::GetMasternodeVinAndKeys(CPubKey& pubKeyRet,
     // Masternode collateral value
     const auto& consensus = Params().GetConsensus();
     if (txOut.nValue != consensus.nMNCollateralAmt) {
-        strError = strprintf("Invalid collateral tx value, must be %s PIV", FormatMoney(Params().GetConsensus().nMNCollateralAmt));
+        strError = strprintf("Invalid collateral tx value, must be %s MAT", FormatMoney(Params().GetConsensus().nMNCollateralAmt));
         return error("%s: tx %s, index %d not a masternode collateral", __func__, collateralOut.hash.GetHex(), collateralOut.n);
     }
 
@@ -3118,7 +3118,7 @@ bool CWallet::CreateTransaction(const std::vector<CRecipient>& vecSend,
                 if (nChange > 0) {
                     // Fill a vout to ourself
                     // TODO: pass in scriptChange instead of reservekey so
-                    // change transaction isn't always pay-to-pivx-address
+                    // change transaction isn't always pay-to-matx-address
                     bool combineChange = false;
 
                     // coin control: send change to custom address
@@ -3305,7 +3305,7 @@ int CWallet::GetLastBlockHeightLockWallet() const
     return WITH_LOCK(cs_wallet, return m_last_block_processed_height;);
 }
 
-bool CWallet::CreateCoinstakeOuts(const CPivStake& stakeInput, std::vector<CTxOut>& vout, CAmount nTotal) const
+bool CWallet::CreateCoinstakeOuts(const CMatStake& stakeInput, std::vector<CTxOut>& vout, CAmount nTotal) const
 {
     std::vector<valtype> vSolutions;
     txnouttype whichType;
@@ -3377,7 +3377,7 @@ bool CWallet::CreateCoinStake(
     int nAttempts = 0;
     for (auto it = availableCoins->begin(); it != availableCoins->end();) {
         COutPoint outPoint = COutPoint(it->tx->GetHash(), it->i);
-        CPivStake stakeInput(it->tx->tx->vout[it->i],
+        CMatStake stakeInput(it->tx->tx->vout[it->i],
                              outPoint,
                              it->pindex);
 
@@ -4287,7 +4287,7 @@ CWallet* CWallet::CreateWalletFromFile(const std::string& name, const fs::path& 
     const bool fLegacyWallet = gArgs.GetBoolArg("-legacywallet", false);
     if (gArgs.GetBoolArg("-upgradewallet", fFirstRun && !fLegacyWallet) ||
             (!walletInstance->IsLocked() && prev_version == FEATURE_PRE_SPLIT_KEYPOOL)) {
-        if (prev_version <= FEATURE_PRE_PIVX && walletInstance->IsLocked()) {
+        if (prev_version <= FEATURE_PRE_MATX && walletInstance->IsLocked()) {
             // Cannot upgrade a locked wallet
             UIError(_("Cannot upgrade a locked wallet."));
             return nullptr;
@@ -4334,7 +4334,7 @@ CWallet* CWallet::CreateWalletFromFile(const std::string& name, const fs::path& 
             }
             // Create legacy wallet
             LogPrintf("Creating Pre-HD Wallet\n");
-            walletInstance->SetMaxVersion(FEATURE_PRE_PIVX);
+            walletInstance->SetMaxVersion(FEATURE_PRE_MATX);
         }
 
         // Top up the keypool
@@ -4550,7 +4550,7 @@ void CWallet::SetNull()
     // Stake split threshold
     nStakeSplitThreshold = DEFAULT_STAKE_SPLIT_THRESHOLD;
 
-    // User-defined fee PIV/kb
+    // User-defined fee MAT/kb
     fUseCustomFee = false;
     nCustomFee = CWallet::minTxFee.GetFeePerK();
 

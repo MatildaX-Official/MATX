@@ -1,9 +1,9 @@
-// Copyright (c) 2021-2022 The PIVX Core developers
+// Copyright (c) 2021-2022 The MATX Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or https://www.opensource.org/licenses/mit-license.php.
 
-#ifndef PIVX_TIERTWO_INIT_H
-#define PIVX_TIERTWO_INIT_H
+#ifndef MATX_TIERTWO_INIT_H
+#define MATX_TIERTWO_INIT_H
 
 #include <string>
 #include "fs.h"
@@ -60,4 +60,4 @@ void DeleteTierTwo();
 void InterruptTierTwo();
 
 
-#endif //PIVX_TIERTWO_INIT_H
+#endif //MATX_TIERTWO_INIT_H

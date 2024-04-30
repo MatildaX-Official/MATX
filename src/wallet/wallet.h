@@ -1,12 +1,12 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2021 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2022 The PIVX Core developers
+// Copyright (c) 2015-2022 The MATX Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef PIVX_WALLET_H
-#define PIVX_WALLET_H
+#ifndef MATX_WALLET_H
+#define MATX_WALLET_H
 
 #include "addressbook.h"
 #include "amount.h"
@@ -107,7 +107,7 @@ enum WalletFeature {
     FEATURE_WALLETCRYPT = 40000, // wallet encryption
     FEATURE_COMPRPUBKEY = 60000, // compressed public keys
 
-    FEATURE_PRE_PIVX = 61000, // inherited version..
+    FEATURE_PRE_MATX = 61000, // inherited version..
 
     // The following features were implemented in BTC but not in our wallet, we can simply skip them.
     // FEATURE_HD = 130000,  Hierarchical key derivation after BIP32 (HD Wallet)
@@ -736,7 +736,7 @@ public:
     // Staker status (last hashed block and time)
     CStakerStatus* pStakerStatus = nullptr;
 
-    // User-defined fee PIV/kb
+    // User-defined fee MAT/kb
     bool fUseCustomFee;
     CAmount nCustomFee;
 
@@ -844,7 +844,7 @@ public:
 
     /**
      * Return list of available coins and locked coins grouped by non-change output address.
-     * PIVX: group coins by pair <CTxDestination, Optional<CTxDestination>>. The optional destination
+     * MATX: group coins by pair <CTxDestination, Optional<CTxDestination>>. The optional destination
      * is reserved for the staker address in case of P2CS.
      */
     std::map<std::pair<CTxDestination, Optional<CTxDestination>>, std::vector<COutput>> ListCoins() const;
@@ -853,7 +853,7 @@ public:
      */
     std::map<libzcash::SaplingPaymentAddress, std::vector<SaplingNoteEntry>> ListNotes() const;
 
-    /// Get 10000 PIV output and keys which can be used for the Masternode
+    /// Get 10000 MAT output and keys which can be used for the Masternode
     bool GetMasternodeVinAndKeys(CPubKey& pubKeyRet,
                                  CKey& keyRet,
                                  const COutPoint& collateralOut,
@@ -1112,7 +1112,7 @@ public:
     CWallet::CommitResult CommitTransaction(CTransactionRef tx, CReserveKey& opReservekey, CConnman* connman);
     CWallet::CommitResult CommitTransaction(CTransactionRef tx, CReserveKey* reservekey, CConnman* connman, mapValue_t* extraValues=nullptr);
 
-    bool CreateCoinstakeOuts(const CPivStake& stakeInput, std::vector<CTxOut>& vout, CAmount nTotal) const;
+    bool CreateCoinstakeOuts(const CMatStake& stakeInput, std::vector<CTxOut>& vout, CAmount nTotal) const;
     bool CreateCoinStake(const CBlockIndex* pindexPrev,
                          unsigned int nBits,
                          CMutableTransaction& txNew,
@@ -1353,4 +1353,4 @@ public:
     }
 };
 
-#endif // PIVX_WALLET_H
+#endif // MATX_WALLET_H

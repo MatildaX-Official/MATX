@@ -1,10 +1,10 @@
 // Copyright (c) 2018-2021 The Dash Core developers
-// Copyright (c) 2021 The PIVX Core developers
+// Copyright (c) 2021 The MATX Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef PIVX_LLMQ_INIT_H
-#define PIVX_LLMQ_INIT_H
+#ifndef MATX_LLMQ_INIT_H
+#define MATX_LLMQ_INIT_H
 
 #include "scheduler.h"
 
@@ -25,4 +25,4 @@ void InterruptLLMQSystem();
 
 } // namespace llmq
 
-#endif // PIVX_LLMQ_INIT_H
+#endif // MATX_LLMQ_INIT_H

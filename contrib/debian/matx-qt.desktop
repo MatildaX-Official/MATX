@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=MATX Core
+Comment=MATX P2P Cryptocurrency
+Comment[fr]=MATX, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=MATX, eşten eşe kriptografik sanal para birimi
+Exec=matx-qt %u
+Terminal=false
+Type=Application
+Icon=matx128
+MimeType=x-scheme-handler/matx;
+Categories=Office;Finance;
+StartupWMClass=Matx-qt

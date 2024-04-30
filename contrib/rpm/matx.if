@@ -1,0 +1,157 @@
+
+## <summary>policy for matx</summary>
+
+
+########################################
+## <summary>
+##	Transition to matx.
+## </summary>
+## <param name="domain">
+## <summary>
+##	Domain allowed to transition.
+## </summary>
+## </param>
+#
+interface(`matx_domtrans',`
+	gen_require(`
+		type matx_t, matx_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	domtrans_pattern($1, matx_exec_t, matx_t)
+')
+
+
+########################################
+## <summary>
+##	Execute matx server in the matx domain.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`matx_initrc_domtrans',`
+	gen_require(`
+		type matx_initrc_exec_t;
+	')
+
+	init_labeled_script_domtrans($1, matx_initrc_exec_t)
+')
+
+
+########################################
+## <summary>
+##	Search matx lib directories.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`matx_search_lib',`
+	gen_require(`
+		type matx_var_lib_t;
+	')
+
+	allow $1 matx_var_lib_t:dir search_dir_perms;
+	files_search_var_lib($1)
+')
+
+########################################
+## <summary>
+##	Read matx lib files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`matx_read_lib_files',`
+	gen_require(`
+		type matx_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	read_files_pattern($1, matx_var_lib_t, matx_var_lib_t)
+')
+
+########################################
+## <summary>
+##	Manage matx lib files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`matx_manage_lib_files',`
+	gen_require(`
+		type matx_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	manage_files_pattern($1, matx_var_lib_t, matx_var_lib_t)
+')
+
+########################################
+## <summary>
+##	Manage matx lib directories.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`matx_manage_lib_dirs',`
+	gen_require(`
+		type matx_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	manage_dirs_pattern($1, matx_var_lib_t, matx_var_lib_t)
+')
+
+
+########################################
+## <summary>
+##	All of the rules required to administrate
+##	a matx environment
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+## <param name="role">
+##	<summary>
+##	Role allowed access.
+##	</summary>
+## </param>
+## <rolecap/>
+#
+interface(`matx_admin',`
+	gen_require(`
+		type matx_t;
+		type matx_initrc_exec_t;
+		type matx_var_lib_t;
+	')
+
+	allow $1 matx_t:process { ptrace signal_perms };
+	ps_process_pattern($1, matx_t)
+
+	matx_initrc_domtrans($1)
+	domain_system_change_exemption($1)
+	role_transition $2 matx_initrc_exec_t system_r;
+	allow $2 system_r;
+
+	files_search_var_lib($1)
+	admin_pattern($1, matx_var_lib_t)
+
+')
+

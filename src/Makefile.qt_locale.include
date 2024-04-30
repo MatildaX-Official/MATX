@@ -1,18 +1,18 @@
 QT_TS = \
-  qt/locale/pivx_bn.ts \
-  qt/locale/pivx_de.ts \
-  qt/locale/pivx_en.ts \
-  qt/locale/pivx_es.ts \
-  qt/locale/pivx_es_ES.ts \
-  qt/locale/pivx_fa.ts \
-  qt/locale/pivx_fr_FR.ts \
-  qt/locale/pivx_hr_HR.ts \
-  qt/locale/pivx_it.ts \
-  qt/locale/pivx_ko_KR.ts \
-  qt/locale/pivx_nl.ts \
-  qt/locale/pivx_pl.ts \
-  qt/locale/pivx_ru.ts \
-  qt/locale/pivx_sv.ts \
-  qt/locale/pivx_tr.ts \
-  qt/locale/pivx_zh_CN.ts \
-  qt/locale/pivx_zh_TW.ts
+  qt/locale/matx_bn.ts \
+  qt/locale/matx_de.ts \
+  qt/locale/matx_en.ts \
+  qt/locale/matx_es.ts \
+  qt/locale/matx_es_ES.ts \
+  qt/locale/matx_fa.ts \
+  qt/locale/matx_fr_FR.ts \
+  qt/locale/matx_hr_HR.ts \
+  qt/locale/matx_it.ts \
+  qt/locale/matx_ko_KR.ts \
+  qt/locale/matx_nl.ts \
+  qt/locale/matx_pl.ts \
+  qt/locale/matx_ru.ts \
+  qt/locale/matx_sv.ts \
+  qt/locale/matx_tr.ts \
+  qt/locale/matx_zh_CN.ts \
+  qt/locale/matx_zh_TW.ts

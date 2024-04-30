@@ -1,0 +1,6 @@
+usr/local/bin/matx-qt usr/bin
+share/pixmaps/matx32.xpm usr/share/pixmaps
+share/pixmaps/matx16.xpm usr/share/pixmaps
+share/pixmaps/matx128.png usr/share/pixmaps
+debian/matx-qt.desktop usr/share/applications
+debian/matx-qt.protocol usr/share/kde4/services/

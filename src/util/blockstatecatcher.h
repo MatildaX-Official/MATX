@@ -1,9 +1,9 @@
-// Copyright (c) 2021 The PIVX Core developers
+// Copyright (c) 2021 The MATX Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or https://www.opensource.org/licenses/mit-license.php.
 
-#ifndef PIVX_BLOCKSTATECATCHER_H
-#define PIVX_BLOCKSTATECATCHER_H
+#ifndef MATX_BLOCKSTATECATCHER_H
+#define MATX_BLOCKSTATECATCHER_H
 
 #include "consensus/validation.h"
 #include "validationinterface.h"
@@ -56,4 +56,4 @@ public:
     }
 };
 
-#endif //PIVX_BLOCKSTATECATCHER_H
+#endif //MATX_BLOCKSTATECATCHER_H
